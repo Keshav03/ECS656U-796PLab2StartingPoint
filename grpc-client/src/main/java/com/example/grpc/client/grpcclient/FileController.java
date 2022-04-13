@@ -42,10 +42,10 @@ public class FileUploadController {
                 }
             });
 
-            return "Files uploaded sucessfully! "
+            return "Files uploaded sucessfully! ";
 
         } catch (Exception e) {
-            return "Error in uploading files."
+            return "Error in uploading files.";
         }
     }
 

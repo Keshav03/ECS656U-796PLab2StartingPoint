@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import java.io.IOException;
+import org.springframework.ui.Model;
 
-@RestController
+@Controller
 public class PingPongEndpoint {    
 
 	GRPCClientService grpcClientService;    
@@ -24,8 +29,24 @@ public class PingPongEndpoint {
     	public String ping() {
         	return grpcClientService.ping();
     	}
-        @GetMapping("/add")
-	public String add() {
-		return grpcClientService.add();
+        @RequestMapping("/add")
+	public String add(Model model,@RequestParam("mA") String mA,@RequestParam("mB") String mB ) {
+		String resp = grpcClientService.add(mA,mB);
+		model.addAttribute("mA",mA);
+		model.addAttribute("mB",mB);
+		model.addAttribute("result",resp);
+		return "upload";
 	}
+
+	@RequestMapping("/multiply")
+        public String multiply(Model model,@RequestParam("mA") String mA,@RequestParam("mB") String mB ) {
+                String resp = grpcClientService.multiply(mA,mB);
+                model.addAttribute("mA",mA);
+                model.addAttribute("mB",mB);
+                model.addAttribute("result",resp);
+                return "upload";
+        }
+
+
 }
+

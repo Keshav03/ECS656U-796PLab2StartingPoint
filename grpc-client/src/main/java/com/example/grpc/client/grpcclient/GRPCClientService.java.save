@@ -1,0 +1,83 @@
+
+package com.example.grpc.client.grpcclient;
+
+import com.example.grpc.server.grpcserver.PingRequest;
+import com.example.grpc.server.grpcserver.PongResponse;
+import com.example.grpc.server.grpcserver.PingPongServiceGrpc;
+import com.example.grpc.server.grpcserver.MatrixRequest;
+import com.example.grpc.server.grpcserver.MatrixReply;
+import com.example.grpc.server.grpcserver.MatrixServiceGrpc;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import net.devh.boot.grpc.client.inject.GrpcClient;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Service;
+@Service
+public class GRPCClientService {
+    public String ping() {
+        	ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090)
+                .usePlaintext()
+                .build();        
+		PingPongServiceGrpc.PingPongServiceBlockingStub stub
+                = PingPongServiceGrpc.newBlockingStub(channel);        
+		PongResponse helloResponse = stub.ping(PingRequest.newBuilder()
+                .setPing("")
+                .build());        
+		channel.shutdown();        
+		return helloResponse.getPong();
+    }
+    public String add(String mA,String mB){
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",9090)
+		.usePlaintext()
+		.build();
+		MatrixServiceGrpc.MatrixServiceBlockingStub stub
+		 = MatrixServiceGrpc.newBlockingStub(channel);
+
+
+		String[] rows= mA.split("\n");
+           	int rowNo = rows.length;
+           	String columns[] = rows[0].split(" ");
+           	int columnNo = columns.length;
+           	int matrixA[][] = new int[rowNo][columnNo];
+           	for (int i=0; i<rowNo; i++) {
+                	columns = rows[i].split(" ");
+                	if (columns.length != rowNo){
+                        	model.addAttribute("status","Invalid! Please upload a valid square matrix!");
+                        	return "interface";
+                	}
+                	for(int j=0; j<columnNo; j++){
+                        	try{
+                                	int numberA =  Integer.parseInt(columns[j].replaceAll("[^0-9]", ""));
+                                	matrixA[i][j] = numberA;
+                        	}catch(NumberFormatException ex){
+                                	System.out.println("Not a number!");
+                        	}
+                	}
+            	}
+
+
+		
+        if(matrixA.leng
+
+
+
+
+
+
+		MatrixReply A=stub.addBlock(MatrixRequest.newBuilder()
+			.setA00(1)
+			.setA01(2)
+			.setA10(5)
+			.setA11(6)
+			.setB00(1)
+			.setB01(2)
+			.setB10(5)
+			.setB11(6)
+			.build());
+		String resp= A.getC00()+" "+A.getC01()+"\n"+A.getC10()+" "+A.getC11()+"\n";
+
+
+		
+		return resp;
+    }
+}

@@ -1,3 +1,4 @@
+
 package com.example.grpc.client.grpcclient;
 
 import com.example.grpc.server.grpcserver.PingRequest;
@@ -25,23 +26,45 @@ public class GRPCClientService {
 		channel.shutdown();        
 		return helloResponse.getPong();
     }
-    public String add(){
+    public String add(String mA,String mB){
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",9090)
 		.usePlaintext()
 		.build();
 		MatrixServiceGrpc.MatrixServiceBlockingStub stub
 		 = MatrixServiceGrpc.newBlockingStub(channel);
+
 		MatrixReply A=stub.addBlock(MatrixRequest.newBuilder()
-			.setA00(1)
-			.setA01(2)
-			.setA10(5)
-			.setA11(6)
-			.setB00(1)
-			.setB01(2)
-			.setB10(5)
-			.setB11(6)
+			.setM1(mA)
+			.setM2(mB)
 			.build());
-		String resp= A.getC00()+" "+A.getC01()+"<br>"+A.getC10()+" "+A.getC11()+"\n";
+
+		String resp = A.getM3();            
 		return resp;
     }
+
+    public String multiply(String mA,String mB){
+                ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",9090)
+                .usePlaintext()
+                .build();
+                MatrixServiceGrpc.MatrixServiceBlockingStub stub
+                 = MatrixServiceGrpc.newBlockingStub(channel);
+
+                MatrixReply A=stub.multiplyBlock(MatrixRequest.newBuilder()
+                        .setM1(mA)
+                        .setM2(mB)
+                        .build());
+                String resp = A.getM3();            
+                return resp;
+    }
+
+
+	private static double footPrint(MatrixServiceGrpc.MatrixServiceBlockingStub stub, int a, int b){
+
+                double startTime = System.nanoTime();
+                MatrixReply temp=stub.multiplyBlock(MatrixRequest.newBuilder().setA(a).setB(b).build());
+                double endTime = System.nanoTime();
+                double footprint= endTime-startTime;
+                return (footprint/1000000000);
+        }
+
 }

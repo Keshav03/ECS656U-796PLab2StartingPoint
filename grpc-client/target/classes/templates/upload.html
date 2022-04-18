@@ -24,6 +24,7 @@
                 <form method="POST" enctype="multipart/form-data" action="/add">
 		       <input type="hidden" name="mA" th:value="${mA}"></inptut>
 		       <input type="hidden" name="mB" th:value="${mB}"></inptut>                        
+			<input type="text" name="deadline"></input>
 			<input type="submit" value="Add" />
                              
                 </form>
@@ -31,8 +32,9 @@
 		<form method="POST" enctype="multipart/form-data" action="/multiply">
 		       <input type="hidden" name="mA" th:value="${mA}"></inptut>
                        <input type="hidden" name="mB" th:value="${mB}"></inptut>
+			<input type="text" name="deadline"></input>
+
                        <input type="submit" value="Multiply" />
-  
                 </form>
 
 </div>

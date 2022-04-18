@@ -39,8 +39,8 @@ public class PingPongEndpoint {
 	}
 
 	@RequestMapping("/multiply")
-        public String multiply(Model model,@RequestParam("mA") String mA,@RequestParam("mB") String mB ) {
-                String resp = grpcClientService.multiply(mA,mB);
+        public String multiply(Model model,@RequestParam("mA") String mA,@RequestParam("mB") String mB ,@RequestParam("deadline") int deadline) {
+                String resp = grpcClientService.multiply(mA,mB,deadline);
                 model.addAttribute("mA",mA);
                 model.addAttribute("mB",mB);
                 model.addAttribute("result",resp);

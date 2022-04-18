@@ -34,8 +34,8 @@ public final class MatrixMult {
   static {
     java.lang.String[] descriptorData = {
       "\n\014matrix.proto\022\nmatrixmult\"\'\n\rMatrixRequ" +
-      "est\022\n\n\002m1\030\001 \001(\t\022\n\n\002m2\030\002 \001(\t\"\031\n\013MatrixRep" +
-      "ly\022\n\n\002m3\030\001 \001(\t2\230\001\n\rMatrixService\022E\n\rMult" +
+      "est\022\n\n\002m1\030\001 \001(\005\022\n\n\002m2\030\002 \001(\005\"\031\n\013MatrixRep" +
+      "ly\022\n\n\002m3\030\001 \001(\0052\230\001\n\rMatrixService\022E\n\rMult" +
       "iplyBlock\022\031.matrixmult.MatrixRequest\032\027.m" +
       "atrixmult.MatrixReply\"\000\022@\n\010AddBlock\022\031.ma" +
       "trixmult.MatrixRequest\032\027.matrixmult.Matr" +

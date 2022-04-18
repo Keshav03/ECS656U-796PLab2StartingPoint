@@ -28,13 +28,13 @@ service MatrixService{
 
 // The request message containing the two matricies
 message MatrixRequest {
-string m1 = 1; 
-string m2 = 2;
+int32 m1 = 1; 
+int32 m2 = 2;
 }
 
 // The response message containing the result marix
 message MatrixReply {
-string m3 = 1;
+int32 m3 = 1;
 }
 
 

@@ -75,43 +75,8 @@ public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase
     	{
         	System.out.println("Request received from client:\n" + request);
   
-		String mA_string = request.getM1();
-                String mB_string = request.getM2();
-
-                String[] rows= mA_string.split("\n");
-                int rowNo = rows.length;
-                String columns[] = rows[0].split(" ");
-                int columnNo = columns.length;
-                int matrixA[][] = new int[rowNo][columnNo];
-                for (int i=0; i<rowNo; i++) {
-                        columns = rows[i].split(" ");
-                        for(int j=0; j<columnNo; j++){
-                                try{
-                                        int numberA =  Integer.parseInt(columns[j].replaceAll("[^0-9]", ""));
-                                        matrixA[i][j] = numberA;
-                                }catch(NumberFormatException ex){
-                                        System.out.println("Not a number!");
-                                }
-                        }
-                }
-
-                String rowsB[] = mB_string.split("\n");
-                int rowNoB = rowsB.length;
-                String columnsB[] = rowsB[0].split(" ");
-                 int columnNoB = columnsB.length;
-                int matrixB[][] = new int[rowNoB][columnNoB];
-                for (int i=0; i<rowNoB; i++) {
-                        columnsB = rowsB[i].split(" ");
-
-                        for(int j=0; j<columnNoB; j++) {
-                                try{
-                                        int numberB =  Integer.parseInt(columnsB[j].replaceAll("[^0-9]", ""));
-                                        matrixB[i][j] = numberB;
-                                }catch(NumberFormatException ex){
-                                        System.out.println("Not a number!");
-                                }
-                        }
-                }
+		int[][] matrixA = request.getM1();
+                int[][] matrixB = request.getM2();
 
                 int mC_row = matrixA.length;
                 int mC_col = matrixA[0].length;

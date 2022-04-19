@@ -110,14 +110,14 @@ public class GRPCClientService {
                 System.out.println("\n=====================================");
                 System.out.println("Deadline: " + deadline + " seconds ");
  
-                ManagedChannel channel1 = ManagedChannelBuilder.forAddress("35.188.76.82", 9090).usePlaintext().build();  
-                ManagedChannel channel2 = ManagedChannelBuilder.forAddress("35.202.189.202", 9090).usePlaintext().build();  
-                ManagedChannel channel3 = ManagedChannelBuilder.forAddress("35.226.251.88", 9090).usePlaintext().build();  
-                ManagedChannel channel4 = ManagedChannelBuilder.forAddress("35.238.0.116", 9090).usePlaintext().build();  
-                ManagedChannel channel5 = ManagedChannelBuilder.forAddress("35.238.0.116", 9090).usePlaintext().build();  
-                ManagedChannel channel6 = ManagedChannelBuilder.forAddress("34.68.225.13", 9090).usePlaintext().build();  
-                ManagedChannel channel7 = ManagedChannelBuilder.forAddress("35.188.202.120", 9090).usePlaintext().build();  
-                ManagedChannel channel8 = ManagedChannelBuilder.forAddress("104.155.153.198", 9080).usePlaintext().build();  
+                ManagedChannel channel1 = ManagedChannelBuilder.forAddress("10.128.0.6", 9090).usePlaintext().build();  
+                ManagedChannel channel2 = ManagedChannelBuilder.forAddress("10.128.0.7", 9090).usePlaintext().build();  
+                ManagedChannel channel3 = ManagedChannelBuilder.forAddress("10.128.0.8", 9090).usePlaintext().build();  
+                ManagedChannel channel4 = ManagedChannelBuilder.forAddress("10.128.0.9", 9090).usePlaintext().build();  
+                ManagedChannel channel5 = ManagedChannelBuilder.forAddress("10.128.0.10", 9090).usePlaintext().build();  
+                ManagedChannel channel6 = ManagedChannelBuilder.forAddress("10.128.0.11", 9090).usePlaintext().build();  
+                ManagedChannel channel7 = ManagedChannelBuilder.forAddress("10.128.0.12", 9090).usePlaintext().build();  
+                ManagedChannel channel8 = ManagedChannelBuilder.forAddress("10.128.0.13", 9080).usePlaintext().build();  
 
 		System.out.println("created");
 
@@ -155,8 +155,10 @@ public class GRPCClientService {
                 int random = r.nextInt(8);
 
 		long startTime = System.nanoTime();
+		System.out.println("here")
                 MatrixReply temp=stubs.get(random).multiplyBlock(MatrixRequest.newBuilder().setM1(matrixA[0][0]).setM2(matrixB[N-1][N-1]).build());
-                long endTime = System.nanoTime();
+                System.out.printl("not here")
+		long endTime = System.nanoTime();
                 double footprint= (endTime-startTime)/1000000000;
 
                 // Get execution time and number of needed servers

@@ -21,6 +21,8 @@ public  final class MatrixRequest extends
   private MatrixRequest() {
     m1_ = 0;
     m2_ = 0;
+    m11_ = "";
+    m22_ = "";
   }
 
   @java.lang.Override
@@ -56,6 +58,18 @@ public  final class MatrixRequest extends
           case 16: {
 
             m2_ = input.readInt32();
+            break;
+          }
+          case 26: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            m11_ = s;
+            break;
+          }
+          case 34: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            m22_ = s;
             break;
           }
         }
@@ -99,6 +113,74 @@ public  final class MatrixRequest extends
     return m2_;
   }
 
+  public static final int M11_FIELD_NUMBER = 3;
+  private volatile java.lang.Object m11_;
+  /**
+   * <code>string m11 = 3;</code>
+   */
+  public java.lang.String getM11() {
+    java.lang.Object ref = m11_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      m11_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string m11 = 3;</code>
+   */
+  public com.google.protobuf.ByteString
+      getM11Bytes() {
+    java.lang.Object ref = m11_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      m11_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int M22_FIELD_NUMBER = 4;
+  private volatile java.lang.Object m22_;
+  /**
+   * <code>string m22 = 4;</code>
+   */
+  public java.lang.String getM22() {
+    java.lang.Object ref = m22_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      m22_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string m22 = 4;</code>
+   */
+  public com.google.protobuf.ByteString
+      getM22Bytes() {
+    java.lang.Object ref = m22_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      m22_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -117,6 +199,12 @@ public  final class MatrixRequest extends
     if (m2_ != 0) {
       output.writeInt32(2, m2_);
     }
+    if (!getM11Bytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, m11_);
+    }
+    if (!getM22Bytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, m22_);
+    }
   }
 
   public int getSerializedSize() {
@@ -131,6 +219,12 @@ public  final class MatrixRequest extends
     if (m2_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(2, m2_);
+    }
+    if (!getM11Bytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, m11_);
+    }
+    if (!getM22Bytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, m22_);
     }
     memoizedSize = size;
     return size;
@@ -152,6 +246,10 @@ public  final class MatrixRequest extends
         == other.getM1());
     result = result && (getM2()
         == other.getM2());
+    result = result && getM11()
+        .equals(other.getM11());
+    result = result && getM22()
+        .equals(other.getM22());
     return result;
   }
 
@@ -166,6 +264,10 @@ public  final class MatrixRequest extends
     hash = (53 * hash) + getM1();
     hash = (37 * hash) + M2_FIELD_NUMBER;
     hash = (53 * hash) + getM2();
+    hash = (37 * hash) + M11_FIELD_NUMBER;
+    hash = (53 * hash) + getM11().hashCode();
+    hash = (37 * hash) + M22_FIELD_NUMBER;
+    hash = (53 * hash) + getM22().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -303,6 +405,10 @@ public  final class MatrixRequest extends
 
       m2_ = 0;
 
+      m11_ = "";
+
+      m22_ = "";
+
       return this;
     }
 
@@ -327,6 +433,8 @@ public  final class MatrixRequest extends
       com.example.grpc.server.grpcserver.MatrixRequest result = new com.example.grpc.server.grpcserver.MatrixRequest(this);
       result.m1_ = m1_;
       result.m2_ = m2_;
+      result.m11_ = m11_;
+      result.m22_ = m22_;
       onBuilt();
       return result;
     }
@@ -373,6 +481,14 @@ public  final class MatrixRequest extends
       }
       if (other.getM2() != 0) {
         setM2(other.getM2());
+      }
+      if (!other.getM11().isEmpty()) {
+        m11_ = other.m11_;
+        onChanged();
+      }
+      if (!other.getM22().isEmpty()) {
+        m22_ = other.m22_;
+        onChanged();
       }
       onChanged();
       return this;
@@ -448,6 +564,144 @@ public  final class MatrixRequest extends
     public Builder clearM2() {
       
       m2_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object m11_ = "";
+    /**
+     * <code>string m11 = 3;</code>
+     */
+    public java.lang.String getM11() {
+      java.lang.Object ref = m11_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        m11_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string m11 = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getM11Bytes() {
+      java.lang.Object ref = m11_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        m11_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string m11 = 3;</code>
+     */
+    public Builder setM11(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      m11_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string m11 = 3;</code>
+     */
+    public Builder clearM11() {
+      
+      m11_ = getDefaultInstance().getM11();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string m11 = 3;</code>
+     */
+    public Builder setM11Bytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      m11_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object m22_ = "";
+    /**
+     * <code>string m22 = 4;</code>
+     */
+    public java.lang.String getM22() {
+      java.lang.Object ref = m22_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        m22_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string m22 = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getM22Bytes() {
+      java.lang.Object ref = m22_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        m22_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string m22 = 4;</code>
+     */
+    public Builder setM22(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      m22_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string m22 = 4;</code>
+     */
+    public Builder clearM22() {
+      
+      m22_ = getDefaultInstance().getM22();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string m22 = 4;</code>
+     */
+    public Builder setM22Bytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      m22_ = value;
       onChanged();
       return this;
     }

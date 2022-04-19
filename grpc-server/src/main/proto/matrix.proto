@@ -30,11 +30,16 @@ service MatrixService{
 message MatrixRequest {
 int32 m1 = 1; 
 int32 m2 = 2;
+string m11 = 3;
+string m22 = 4; 
+
 }
 
 // The response message containing the result marix
 message MatrixReply {
 int32 m3 = 1;
+string m33 = 2;
+
 }
 
 

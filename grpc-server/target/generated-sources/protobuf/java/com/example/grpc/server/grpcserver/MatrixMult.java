@@ -33,14 +33,15 @@ public final class MatrixMult {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014matrix.proto\022\nmatrixmult\"\'\n\rMatrixRequ" +
-      "est\022\n\n\002m1\030\001 \001(\t\022\n\n\002m2\030\002 \001(\t\"\031\n\013MatrixRep" +
-      "ly\022\n\n\002m3\030\001 \001(\t2\230\001\n\rMatrixService\022E\n\rMult" +
-      "iplyBlock\022\031.matrixmult.MatrixRequest\032\027.m" +
-      "atrixmult.MatrixReply\"\000\022@\n\010AddBlock\022\031.ma" +
-      "trixmult.MatrixRequest\032\027.matrixmult.Matr" +
-      "ixReply\"\000B7\n\"com.example.grpc.server.grp" +
-      "cserverB\nMatrixMultP\001\242\002\002MMb\006proto3"
+      "\n\014matrix.proto\022\nmatrixmult\"A\n\rMatrixRequ" +
+      "est\022\n\n\002m1\030\001 \001(\005\022\n\n\002m2\030\002 \001(\005\022\013\n\003m11\030\003 \001(\t" +
+      "\022\013\n\003m22\030\004 \001(\t\"&\n\013MatrixReply\022\n\n\002m3\030\001 \001(\005" +
+      "\022\013\n\003m33\030\002 \001(\t2\230\001\n\rMatrixService\022E\n\rMulti" +
+      "plyBlock\022\031.matrixmult.MatrixRequest\032\027.ma" +
+      "trixmult.MatrixReply\"\000\022@\n\010AddBlock\022\031.mat" +
+      "rixmult.MatrixRequest\032\027.matrixmult.Matri" +
+      "xReply\"\000B7\n\"com.example.grpc.server.grpc" +
+      "serverB\nMatrixMultP\001\242\002\002MMb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -59,13 +60,13 @@ public final class MatrixMult {
     internal_static_matrixmult_MatrixRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_matrixmult_MatrixRequest_descriptor,
-        new java.lang.String[] { "M1", "M2", });
+        new java.lang.String[] { "M1", "M2", "M11", "M22", });
     internal_static_matrixmult_MatrixReply_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_matrixmult_MatrixReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_matrixmult_MatrixReply_descriptor,
-        new java.lang.String[] { "M3", });
+        new java.lang.String[] { "M3", "M33", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

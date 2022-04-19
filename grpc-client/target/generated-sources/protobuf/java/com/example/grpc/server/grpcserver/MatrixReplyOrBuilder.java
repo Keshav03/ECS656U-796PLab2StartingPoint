@@ -11,4 +11,14 @@ public interface MatrixReplyOrBuilder extends
    * <code>int32 m3 = 1;</code>
    */
   int getM3();
+
+  /**
+   * <code>string m33 = 2;</code>
+   */
+  java.lang.String getM33();
+  /**
+   * <code>string m33 = 2;</code>
+   */
+  com.google.protobuf.ByteString
+      getM33Bytes();
 }

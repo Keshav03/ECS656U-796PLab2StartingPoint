@@ -16,4 +16,24 @@ public interface MatrixRequestOrBuilder extends
    * <code>int32 m2 = 2;</code>
    */
   int getM2();
+
+  /**
+   * <code>string m11 = 3;</code>
+   */
+  java.lang.String getM11();
+  /**
+   * <code>string m11 = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getM11Bytes();
+
+  /**
+   * <code>string m22 = 4;</code>
+   */
+  java.lang.String getM22();
+  /**
+   * <code>string m22 = 4;</code>
+   */
+  com.google.protobuf.ByteString
+      getM22Bytes();
 }

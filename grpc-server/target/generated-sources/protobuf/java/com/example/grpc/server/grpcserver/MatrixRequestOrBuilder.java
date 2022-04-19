@@ -8,22 +8,32 @@ public interface MatrixRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string m1 = 1;</code>
+   * <code>int32 m1 = 1;</code>
    */
-  java.lang.String getM1();
-  /**
-   * <code>string m1 = 1;</code>
-   */
-  com.google.protobuf.ByteString
-      getM1Bytes();
+  int getM1();
 
   /**
-   * <code>string m2 = 2;</code>
+   * <code>int32 m2 = 2;</code>
    */
-  java.lang.String getM2();
+  int getM2();
+
   /**
-   * <code>string m2 = 2;</code>
+   * <code>string m11 = 3;</code>
+   */
+  java.lang.String getM11();
+  /**
+   * <code>string m11 = 3;</code>
    */
   com.google.protobuf.ByteString
-      getM2Bytes();
+      getM11Bytes();
+
+  /**
+   * <code>string m22 = 4;</code>
+   */
+  java.lang.String getM22();
+  /**
+   * <code>string m22 = 4;</code>
+   */
+  com.google.protobuf.ByteString
+      getM22Bytes();
 }

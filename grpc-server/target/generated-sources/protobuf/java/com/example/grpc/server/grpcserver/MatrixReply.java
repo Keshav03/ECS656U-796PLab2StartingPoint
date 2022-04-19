@@ -19,7 +19,8 @@ public  final class MatrixReply extends
     super(builder);
   }
   private MatrixReply() {
-    m3_ = "";
+    m3_ = 0;
+    m33_ = "";
   }
 
   @java.lang.Override
@@ -47,10 +48,15 @@ public  final class MatrixReply extends
             }
             break;
           }
-          case 10: {
+          case 8: {
+
+            m3_ = input.readInt32();
+            break;
+          }
+          case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            m3_ = s;
+            m33_ = s;
             break;
           }
         }
@@ -77,33 +83,42 @@ public  final class MatrixReply extends
   }
 
   public static final int M3_FIELD_NUMBER = 1;
-  private volatile java.lang.Object m3_;
+  private int m3_;
   /**
-   * <code>string m3 = 1;</code>
+   * <code>int32 m3 = 1;</code>
    */
-  public java.lang.String getM3() {
-    java.lang.Object ref = m3_;
+  public int getM3() {
+    return m3_;
+  }
+
+  public static final int M33_FIELD_NUMBER = 2;
+  private volatile java.lang.Object m33_;
+  /**
+   * <code>string m33 = 2;</code>
+   */
+  public java.lang.String getM33() {
+    java.lang.Object ref = m33_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      m3_ = s;
+      m33_ = s;
       return s;
     }
   }
   /**
-   * <code>string m3 = 1;</code>
+   * <code>string m33 = 2;</code>
    */
   public com.google.protobuf.ByteString
-      getM3Bytes() {
-    java.lang.Object ref = m3_;
+      getM33Bytes() {
+    java.lang.Object ref = m33_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      m3_ = b;
+      m33_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -122,8 +137,11 @@ public  final class MatrixReply extends
 
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getM3Bytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, m3_);
+    if (m3_ != 0) {
+      output.writeInt32(1, m3_);
+    }
+    if (!getM33Bytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, m33_);
     }
   }
 
@@ -132,8 +150,12 @@ public  final class MatrixReply extends
     if (size != -1) return size;
 
     size = 0;
-    if (!getM3Bytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, m3_);
+    if (m3_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(1, m3_);
+    }
+    if (!getM33Bytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, m33_);
     }
     memoizedSize = size;
     return size;
@@ -151,8 +173,10 @@ public  final class MatrixReply extends
     com.example.grpc.server.grpcserver.MatrixReply other = (com.example.grpc.server.grpcserver.MatrixReply) obj;
 
     boolean result = true;
-    result = result && getM3()
-        .equals(other.getM3());
+    result = result && (getM3()
+        == other.getM3());
+    result = result && getM33()
+        .equals(other.getM33());
     return result;
   }
 
@@ -164,7 +188,9 @@ public  final class MatrixReply extends
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + M3_FIELD_NUMBER;
-    hash = (53 * hash) + getM3().hashCode();
+    hash = (53 * hash) + getM3();
+    hash = (37 * hash) + M33_FIELD_NUMBER;
+    hash = (53 * hash) + getM33().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -298,7 +324,9 @@ public  final class MatrixReply extends
     }
     public Builder clear() {
       super.clear();
-      m3_ = "";
+      m3_ = 0;
+
+      m33_ = "";
 
       return this;
     }
@@ -323,6 +351,7 @@ public  final class MatrixReply extends
     public com.example.grpc.server.grpcserver.MatrixReply buildPartial() {
       com.example.grpc.server.grpcserver.MatrixReply result = new com.example.grpc.server.grpcserver.MatrixReply(this);
       result.m3_ = m3_;
+      result.m33_ = m33_;
       onBuilt();
       return result;
     }
@@ -364,8 +393,11 @@ public  final class MatrixReply extends
 
     public Builder mergeFrom(com.example.grpc.server.grpcserver.MatrixReply other) {
       if (other == com.example.grpc.server.grpcserver.MatrixReply.getDefaultInstance()) return this;
-      if (!other.getM3().isEmpty()) {
-        m3_ = other.m3_;
+      if (other.getM3() != 0) {
+        setM3(other.getM3());
+      }
+      if (!other.getM33().isEmpty()) {
+        m33_ = other.m33_;
         onChanged();
       }
       onChanged();
@@ -394,71 +426,97 @@ public  final class MatrixReply extends
       return this;
     }
 
-    private java.lang.Object m3_ = "";
+    private int m3_ ;
     /**
-     * <code>string m3 = 1;</code>
+     * <code>int32 m3 = 1;</code>
      */
-    public java.lang.String getM3() {
-      java.lang.Object ref = m3_;
+    public int getM3() {
+      return m3_;
+    }
+    /**
+     * <code>int32 m3 = 1;</code>
+     */
+    public Builder setM3(int value) {
+      
+      m3_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 m3 = 1;</code>
+     */
+    public Builder clearM3() {
+      
+      m3_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object m33_ = "";
+    /**
+     * <code>string m33 = 2;</code>
+     */
+    public java.lang.String getM33() {
+      java.lang.Object ref = m33_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        m3_ = s;
+        m33_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string m3 = 1;</code>
+     * <code>string m33 = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getM3Bytes() {
-      java.lang.Object ref = m3_;
+        getM33Bytes() {
+      java.lang.Object ref = m33_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        m3_ = b;
+        m33_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string m3 = 1;</code>
+     * <code>string m33 = 2;</code>
      */
-    public Builder setM3(
+    public Builder setM33(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      m3_ = value;
+      m33_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string m3 = 1;</code>
+     * <code>string m33 = 2;</code>
      */
-    public Builder clearM3() {
+    public Builder clearM33() {
       
-      m3_ = getDefaultInstance().getM3();
+      m33_ = getDefaultInstance().getM33();
       onChanged();
       return this;
     }
     /**
-     * <code>string m3 = 1;</code>
+     * <code>string m33 = 2;</code>
      */
-    public Builder setM3Bytes(
+    public Builder setM33Bytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      m3_ = value;
+      m33_ = value;
       onChanged();
       return this;
     }

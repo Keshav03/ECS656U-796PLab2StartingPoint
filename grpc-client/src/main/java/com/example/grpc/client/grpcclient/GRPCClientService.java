@@ -76,11 +76,11 @@ public class GRPCClientService {
                 }
 
 		MatrixReply A=stub.addBlock(MatrixRequest.newBuilder()
-			.setM1(mA)
-			.setM2(mB)
+			.setM11(mA)
+			.setM22(mB)
 			.build());
 
-		String resp = A.getM3();
+		String resp = A.getM33();
 		return resp;
     }
 
@@ -110,14 +110,16 @@ public class GRPCClientService {
                 System.out.println("\n=====================================");
                 System.out.println("Deadline: " + deadline + " seconds ");
  
-                ManagedChannel channel1 = ManagedChannelBuilder.forAddress("35.188.76.82", 8080).usePlaintext().build();  
-                ManagedChannel channel2 = ManagedChannelBuilder.forAddress("35.202.189.202", 8080).usePlaintext().build();  
-                ManagedChannel channel3 = ManagedChannelBuilder.forAddress("35.226.251.88", 8080).usePlaintext().build();  
-                ManagedChannel channel4 = ManagedChannelBuilder.forAddress("", 8080).usePlaintext().build();  
-                ManagedChannel channel5 = ManagedChannelBuilder.forAddress("", 8080).usePlaintext().build();  
-                ManagedChannel channel6 = ManagedChannelBuilder.forAddress("", 8080).usePlaintext().build();  
-                ManagedChannel channel7 = ManagedChannelBuilder.forAddress("", 8080).usePlaintext().build();  
-                ManagedChannel channel8 = ManagedChannelBuilder.forAddress("", 8080).usePlaintext().build();  
+                ManagedChannel channel1 = ManagedChannelBuilder.forAddress("35.188.76.82", 9090).usePlaintext().build();  
+                ManagedChannel channel2 = ManagedChannelBuilder.forAddress("35.202.189.202", 9090).usePlaintext().build();  
+                ManagedChannel channel3 = ManagedChannelBuilder.forAddress("35.226.251.88", 9090).usePlaintext().build();  
+                ManagedChannel channel4 = ManagedChannelBuilder.forAddress("35.238.0.116", 9090).usePlaintext().build();  
+                ManagedChannel channel5 = ManagedChannelBuilder.forAddress("35.238.0.116", 9090).usePlaintext().build();  
+                ManagedChannel channel6 = ManagedChannelBuilder.forAddress("34.68.225.13", 9090).usePlaintext().build();  
+                ManagedChannel channel7 = ManagedChannelBuilder.forAddress("35.188.202.120", 9090).usePlaintext().build();  
+                ManagedChannel channel8 = ManagedChannelBuilder.forAddress("104.155.153.198", 9080).usePlaintext().build();  
+
+		System.out.println("created");
 
                 MatrixServiceGrpc.MatrixServiceBlockingStub stub1 = MatrixServiceGrpc.newBlockingStub(channel1);
                 MatrixServiceGrpc.MatrixServiceBlockingStub stub2 = MatrixServiceGrpc.newBlockingStub(channel2);
@@ -153,7 +155,7 @@ public class GRPCClientService {
                 int random = r.nextInt(8);
 
 		long startTime = System.nanoTime();
-                //MatrixReply temp=stubs.get(random).multiplyBlock(MatrixRequest.newBuilder().setM1(a[0][0]).setM2(b).build());
+                MatrixReply temp=stubs.get(random).multiplyBlock(MatrixRequest.newBuilder().setM1(matrixA[0][0]).setM2(matrixB[N-1][N-1]).build());
                 long endTime = System.nanoTime();
                 double footprint= (endTime-startTime)/1000000000;
 
@@ -181,25 +183,24 @@ public class GRPCClientService {
                 System.out.println("Number of used servers: " + (int) Math.round(nOserver_needed));
                 System.out.println("=====================================\n");
                 
-
 		nOserver_needed = (int) Math.round(nOserver_needed);
 
-		int c[][] = new int[N][N];
+		int[][] c = new int[N][N];
                 // Start the matrix calculation and print the result onto client 
                 for (int i = 0; i < N; i++) { // row
                         for (int j = 0; j < N; j++) { // col
                             for (int k = 0; k < N; k++) {
                                 
-                                //temp=stubs.get(stub).multiplyBlock(MatrixRequest.newBuilder().setM1(a[i][k]).setM2(b[k][j]).build());
+                                temp=stubs.get(stub).multiplyBlock(MatrixRequest.newBuilder().setM1(matrixA[i][k]).setM2(matrixB[k][j]).build());
                                 if(stub == -1){
 					 stub = 0;
 				}
                                 else{
 					 stub++;
 				}
-                                //MatrixReply temp2=stubs.get(stub).addBlock(MatrixRequest.newBuilder().setM1(c[i][j]).setM2(temp.getM3()).build());
+                                MatrixReply temp2=stubs.get(stub).addBlock(MatrixRequest.newBuilder().setM1(c[i][j]).setM2(temp.getM3()).build());
                                 
-				//c[i][j] = temp2.getM3();
+				c[i][j] = temp2.getM3();
 			
                                 if(stub == nOserver_needed-1){
 					 stub= 0;
@@ -211,7 +212,9 @@ public class GRPCClientService {
                         }
                  }
 
-		String result = matrixToString(c[][]);
+
+
+		String result = matrixToString(c);
 
                 // Close channels
                 channel1.shutdown();
@@ -259,8 +262,8 @@ public class GRPCClientService {
                     // Print result matrix
                     for (int i = 0; i < a.length; i++) {
                         for (int j = 0; j < a[0].length; j++) {
-                            result += c[i][j] + " ";
-                            System.out.print(c[i][j] + " ");
+                            result += a[i][j] + " ";
+                            System.out.print(a[i][j] + " ");
                         }
                         result = "\n";
                         System.out.println("");

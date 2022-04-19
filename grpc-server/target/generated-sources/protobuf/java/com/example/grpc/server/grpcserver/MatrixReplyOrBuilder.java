@@ -8,12 +8,17 @@ public interface MatrixReplyOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string m3 = 1;</code>
+   * <code>int32 m3 = 1;</code>
    */
-  java.lang.String getM3();
+  int getM3();
+
   /**
-   * <code>string m3 = 1;</code>
+   * <code>string m33 = 2;</code>
+   */
+  java.lang.String getM33();
+  /**
+   * <code>string m33 = 2;</code>
    */
   com.google.protobuf.ByteString
-      getM3Bytes();
+      getM33Bytes();
 }

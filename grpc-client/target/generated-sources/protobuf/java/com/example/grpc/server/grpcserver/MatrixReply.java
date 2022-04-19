@@ -20,6 +20,7 @@ public  final class MatrixReply extends
   }
   private MatrixReply() {
     m3_ = 0;
+    m33_ = "";
   }
 
   @java.lang.Override
@@ -50,6 +51,12 @@ public  final class MatrixReply extends
           case 8: {
 
             m3_ = input.readInt32();
+            break;
+          }
+          case 18: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            m33_ = s;
             break;
           }
         }
@@ -84,6 +91,40 @@ public  final class MatrixReply extends
     return m3_;
   }
 
+  public static final int M33_FIELD_NUMBER = 2;
+  private volatile java.lang.Object m33_;
+  /**
+   * <code>string m33 = 2;</code>
+   */
+  public java.lang.String getM33() {
+    java.lang.Object ref = m33_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      m33_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string m33 = 2;</code>
+   */
+  public com.google.protobuf.ByteString
+      getM33Bytes() {
+    java.lang.Object ref = m33_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      m33_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -99,6 +140,9 @@ public  final class MatrixReply extends
     if (m3_ != 0) {
       output.writeInt32(1, m3_);
     }
+    if (!getM33Bytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, m33_);
+    }
   }
 
   public int getSerializedSize() {
@@ -109,6 +153,9 @@ public  final class MatrixReply extends
     if (m3_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(1, m3_);
+    }
+    if (!getM33Bytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, m33_);
     }
     memoizedSize = size;
     return size;
@@ -128,6 +175,8 @@ public  final class MatrixReply extends
     boolean result = true;
     result = result && (getM3()
         == other.getM3());
+    result = result && getM33()
+        .equals(other.getM33());
     return result;
   }
 
@@ -140,6 +189,8 @@ public  final class MatrixReply extends
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + M3_FIELD_NUMBER;
     hash = (53 * hash) + getM3();
+    hash = (37 * hash) + M33_FIELD_NUMBER;
+    hash = (53 * hash) + getM33().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -275,6 +326,8 @@ public  final class MatrixReply extends
       super.clear();
       m3_ = 0;
 
+      m33_ = "";
+
       return this;
     }
 
@@ -298,6 +351,7 @@ public  final class MatrixReply extends
     public com.example.grpc.server.grpcserver.MatrixReply buildPartial() {
       com.example.grpc.server.grpcserver.MatrixReply result = new com.example.grpc.server.grpcserver.MatrixReply(this);
       result.m3_ = m3_;
+      result.m33_ = m33_;
       onBuilt();
       return result;
     }
@@ -341,6 +395,10 @@ public  final class MatrixReply extends
       if (other == com.example.grpc.server.grpcserver.MatrixReply.getDefaultInstance()) return this;
       if (other.getM3() != 0) {
         setM3(other.getM3());
+      }
+      if (!other.getM33().isEmpty()) {
+        m33_ = other.m33_;
+        onChanged();
       }
       onChanged();
       return this;
@@ -390,6 +448,75 @@ public  final class MatrixReply extends
     public Builder clearM3() {
       
       m3_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object m33_ = "";
+    /**
+     * <code>string m33 = 2;</code>
+     */
+    public java.lang.String getM33() {
+      java.lang.Object ref = m33_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        m33_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string m33 = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getM33Bytes() {
+      java.lang.Object ref = m33_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        m33_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string m33 = 2;</code>
+     */
+    public Builder setM33(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      m33_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string m33 = 2;</code>
+     */
+    public Builder clearM33() {
+      
+      m33_ = getDefaultInstance().getM33();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string m33 = 2;</code>
+     */
+    public Builder setM33Bytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      m33_ = value;
       onChanged();
       return this;
     }

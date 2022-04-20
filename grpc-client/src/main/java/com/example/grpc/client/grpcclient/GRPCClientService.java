@@ -42,39 +42,6 @@ public class GRPCClientService {
 		MatrixServiceGrpc.MatrixServiceBlockingStub stub
 		 = MatrixServiceGrpc.newBlockingStub(channel);
 
-                String[] rows= mA.split("\n");
-                int rowNo = rows.length;
-                String columns[] = rows[0].split(" ");
-                int columnNo = columns.length;
-                int matrixA[][] = new int[rowNo][columnNo];
-                for (int i=0; i<rowNo; i++) {
-                        columns = rows[i].split(" ");
-                        for(int j=0; j<columnNo; j++){
-                                try{
-                                        int numberA =  Integer.parseInt(columns[j].replaceAll("[^0-9]", ""));
-                                        matrixA[i][j] = numberA;
-                                }catch(NumberFormatException ex){
-                                        System.out.println("Not a number!");
-                                }
-                        }
-                }
-                String rowsB[] = mB.split("\n");
-                int rowNoB = rowsB.length;
-                String columnsB[] = rowsB[0].split(" ");
-                 int columnNoB = columnsB.length;
-                int matrixB[][] = new int[rowNoB][columnNoB];
-                for (int i=0; i<rowNoB; i++) {
-                        columnsB = rowsB[i].split(" ");
-                        for(int j=0; j<columnNoB; j++) {
-                                try{
-                                        int numberB =  Integer.parseInt(columnsB[j].replaceAll("[^0-9]", ""));
-                                        matrixB[i][j] = numberB;
-                                }catch(NumberFormatException ex){
-                                        System.out.println("Not a number!");
-                                }
-                        }
-                }
-
 		MatrixReply A=stub.addBlock(MatrixRequest.newBuilder()
 			.setM11(mA)
 			.setM22(mB)
@@ -96,9 +63,11 @@ public class GRPCClientService {
                     //    .setM2(mB)
                       //  .build());
 		//String resp = A.getM3();
-              
+		int matrixA[][] = stringToMatrix(mA);
+                int matrixB[][] = stringToMatrix(mB);                
                 String result = grpcClient(mA,mB,deadline);
 		return result;
+	}
 
 	public String grpcClient(String mA, String mB, int deadline){
            
@@ -130,7 +99,6 @@ public class GRPCClientService {
                 stubs.add(stub7);
                 stubs.add(stub8);
 
-
 		int matrixA[][] = stringToMatrix(mA);
                 int matrixB[][] = stringToMatrix(mB);
                 
@@ -143,10 +111,13 @@ public class GRPCClientService {
 		long startTime = System.nanoTime();
                 MatrixReply temp=stubs.get(random).multiplyBlock(MatrixRequest.newBuilder().setM1(matrixA[0][0]).setM2(matrixB[N-1][N-1]).build());
 		long endTime = System.nanoTime();
-                double footprint= (endTime-startTime)/1000000000;
+                long footprint= (endTime-startTime)/1000000000;
+
+		System.out.println("Footprint is :" + footprint);
 
                 int nOofcalls = (int) Math.pow(N, 2);
                 double nOserver_needed = (nOofcalls*footprint)/deadline;
+		System.out.println("NoOfServers: " + nOserver_needed);
 
                 if (nOserver_needed < 1.00 ){
 			 nOserver_needed = 1.00;
@@ -155,22 +126,16 @@ public class GRPCClientService {
                 if(nOserver_needed <2.00 && nOserver_needed > 1.00){
 			 nOserver_needed = 2.00;
                 }
-                System.out.println("Number of server needed: " + nOserver_needed);
-                System.out.println("=====================================");
-                System.out.println("Footprint: " + footprint + " seconds");
-                System.out.println("=====================================");
-
+                
                 if(nOserver_needed > 8){
-                        System.out.println("Expected Deadline too low, multiplication cannot be done!")
+                        System.out.println("Expected Deadline too low, multiplication cannot be done!");
 		}
             
                 System.out.println("Number of used servers: " + (int) Math.round(nOserver_needed));
-                System.out.println("=====================================\n");
                
 		nOserver_needed = (int) Math.round(nOserver_needed);
 
-		int c[][] = new int[N][N];
-                // Start the matrix calculation and print the result onto client 
+		int[][] c = new int[N][N]; 
                 for (int i = 0; i < N; i++) { // row
                         for (int j = 0; j < N; j++) { // col
                             for (int k = 0; k < N; k++) {                
@@ -209,7 +174,6 @@ public class GRPCClientService {
                 channel8.shutdown();
 	    
 		return result;
-
 	}
 
 
@@ -238,12 +202,13 @@ public class GRPCClientService {
 
 	public String matrixToString(int[][] a){
 		String result = "";
-                    // Print result matrix
                     for (int i = 0; i < a.length; i++) {
                         for (int j = 0; j < a[0].length; j++) {
-                            result += a[i][j] + " ";
+			    
+                            result +=""+ a[i][j] + " ";
                         }
-                        result = "\n";
+			
+                        result += "\n";
                     }
 		return result;
 	
@@ -254,7 +219,7 @@ public class GRPCClientService {
 
 
 
-
+5
 }
 
 
